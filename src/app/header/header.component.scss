@@ -1,0 +1,17 @@
+@use '~@medea/atos-test/mixins' as npa;
+
+:host {
+  HEADER {
+    @include npa.createFlexBox(row, center, space-between, nowrap);
+    position: relative;
+    height: var(--at-blog-laout-header-height);
+    min-height: var(--gap-backoffice-header-height);
+    max-height: var(--gap-backoffice-header-height);
+    padding: 0 var(--npa-spacing-24);
+    background-color: var(--npa-color-background-header);
+    box-shadow: 0 3px 9px 0 rgba(var(--npa-color-neutral-12-rgb), 0.25);
+    .blog__title {
+      color: var(--npa-color-white);
+    }
+  }
+}

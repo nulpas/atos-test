@@ -1,0 +1,5 @@
+{
+  "BASE_API_URL__MAIN": "http://fake.api",
+  "BASE_API_URL__SECONDARY": "/assets/data/",
+  "DATE_DEPLOY": "March 27, 1976"
+}

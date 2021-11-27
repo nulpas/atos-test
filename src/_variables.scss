@@ -1,0 +1,9 @@
+%common-variables {
+  --at-blog-laout-header-height: 100px;
+
+  --at-blog-laout-sidebar-width: 20%;
+  --at-blog-laout-sidebar-padding: var(--npa-spacing-32) var(--npa-spacing-24);
+
+  --at-blog-laout-content-height: calc(100% - var(--at-blog-laout-header-height));
+  --at-blog-laout-content-paddign: var(--npa-spacing-32) var(--npa-spacing-24);
+}

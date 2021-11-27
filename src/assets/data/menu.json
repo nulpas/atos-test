@@ -1,0 +1,17 @@
+[
+  {
+    "id": "posts",
+    "name": "Posts",
+    "location": ["/", "posts"]
+  },
+  {
+    "id": "albums",
+    "name": "Albums",
+    "location": ["/", "albums"]
+  },
+  {
+    "id": "users",
+    "name": "Users",
+    "location": ["/", "users"]
+  }
+]

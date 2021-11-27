@@ -1,0 +1,8 @@
+<aside>
+  <div
+    class="menu-option"
+    *ngFor="let option of menu; trackBy: tools.identifier;"
+    [ngClass]="{selected: optionSelected === option.id}">
+    <a [routerLink]="option.location" (click)="ev.preventNoNeededEvent($event); g.urlChanged$.next(true);">{{option.name}}</a>
+  </div>
+</aside>

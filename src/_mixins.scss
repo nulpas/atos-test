@@ -1,0 +1,16 @@
+@use '~@medea/atos-test/mixins' as npa;
+
+//## Mixin for apply common styles to all content views in backoffice sections.
+//## PARAMETERS: void
+@mixin contentView() {
+  position: relative;
+  display: block;
+  height: 100%;
+  padding: var(--at-blog-laout-content-paddign);
+  box-sizing: border-box;
+  overflow: auto;
+
+  @include npa.styleScrollbar(var(--npa-color-space-3));
+
+  @content;
+}

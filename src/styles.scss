@@ -1,1 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'variables';
+
+HTML.npa-atos-test-tpl {
+  height: 100%;
+  background-color: var(--npa-color-background);
+
+  BODY {
+    @extend %common-variables;
+
+    --npa-component-width: 300px;
+
+    position: relative;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}

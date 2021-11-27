@@ -1,0 +1,27 @@
+:host {
+  width: var(--at-blog-laout-sidebar-width);
+  min-width: var(--at-blog-laout-sidebar-width);
+  ASIDE {
+    height: 100%;
+    min-height: 100%;
+    padding: var(--at-blog-laout-content-paddign) var(--at-blog-laout-sidebar-padding);
+    box-sizing: border-box;
+    border-right: 1px solid var(--npa-color-space-3);
+
+    .menu-option {
+      A {
+        display: block;
+        padding: 5px 10px;
+        text-decoration: none;
+      }
+
+      &:hover {
+        background-color: var(--npa-color-action-1);
+      }
+      &.selected {
+        font-weight: 600;
+        background-color: var(--npa-color-space-2);
+      }
+    }
+  }
+}
