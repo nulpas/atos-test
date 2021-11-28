@@ -1,1 +1,37 @@
-post-detail works!
+<h1 class="sub-header npa-font--42">
+  Post Detail
+  <span class="sub-header--controls">
+    <button class="npa-button npa-button--borderless npa-button--icon-left" (click)="ev.preventNoNeededEvent($event); goPostsList();">
+      <i class="npa-icon npa-icon--left icon-arrow-left"></i>
+      Back to posts list
+    </button>
+  </span>
+</h1>
+
+<section class="post" *ngIf="!!post">
+  <h2>{{post.title}}</h2>
+  <div class="post__image" [ngStyle]="{backgroundImage: 'url(assets/images/post-image-example.jpeg)'}"></div>
+  <p class="post__body" [innerText]="post.body"></p>
+  <ng-container *ngIf="!!post.user">
+    <div class="post__user-title npa-font--16 npa-font--semi-bold">
+      <div class="section-separator__icon-box"><i class="npa-icon npa-font--48 icon-user"></i></div>
+      User
+    </div>
+    <app-user-info [user]="post.user"></app-user-info>
+  </ng-container>
+  <ng-container *ngIf="!!post.comments && !!post.comments.length">
+    <div class="post__comments-title npa-font--16 npa-font--semi-bold">
+      <div class="section-separator__icon-box"><i class="npa-icon npa-font--48 icon-message-square"></i></div>
+      Comments
+    </div>
+    <div class="post__comment" *ngFor="let comment of post.comments; trackBy: tools.identifier; let index = index;">
+      <span class="npa-font--semi-bold"><span class="comment__ordinal npa-font--20">#{{index + 1}}</span> {{comment.name}}</span>
+      <p [innerText]="comment.body"></p>
+      <span class="npa-color--space-5 npa-font--semi-bold">{{comment.email}}</span>
+    </div>
+  </ng-container>
+</section>
+
+<div class="loading" *ngIf="loading">
+  <npa-spinner></npa-spinner>
+</div>

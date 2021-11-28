@@ -1,5 +1,27 @@
 @import '../../mixins';
 
 :host {
-  @include contentView();
+  @include contentView() {
+    .post {
+      padding-right: calc(var(--npa-spacing-60) * 3);
+      box-sizing: border-box;
+      .post__image {
+        height: 30vh;
+        background-size: cover;
+        background-position: top center;
+      }
+      .post__user-title {
+        @include sectionSeparator();
+      }
+      .post__comments-title {
+        @include sectionSeparator();
+      }
+      .post__comment {
+        margin-bottom: var(--npa-spacing-48);
+        .comment__ordinal {
+          margin-right: var(--npa-spacing-12);
+        }
+      }
+    }
+  }
 }

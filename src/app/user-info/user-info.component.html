@@ -1,0 +1,14 @@
+<div class="user-info">
+  <div class="user-info__image">
+    <img src="assets/images/2021-profile-me-nulpas-828x828.jpg" alt="{{user?.name}}">
+  </div>
+  <div class="user-info__data">
+    <span class="npa--bold">{{user?.name}}</span> ({{user?.username}})<br>
+    {{user?.address?.street}}, {{user?.address?.suite}}<br>
+    {{user?.address?.zipcode}}, {{user?.address?.city}}<br><br>
+    <span class="npa--bold">mail:</span> {{user?.email}}<br>
+    <span class="npa--bold">phone:</span> {{user?.phone}}<br>
+    <span class="npa--bold">site:</span> <a class="user-info__site-link npa-link npa-link-hover-underline" [href]="user?.websiteHref" target="_blank">{{user?.website}}</a><br>
+    <span class="npa--bold">company:</span> {{user?.company?.name}}
+  </div>
+</div>

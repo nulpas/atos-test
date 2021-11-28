@@ -30,6 +30,9 @@
 
 <section class="blog__posts-grid" *ngIf="!loading">
   <div class="blog__card" *ngFor="let post of posts; trackBy: tools.identifier;">
+    <div class="card--comments npa-font--12">
+      {{post.comments?.length}} comments
+    </div>
     <div class="card--top">
       <h3>{{post.title}}</h3>
       <hr>
@@ -44,7 +47,12 @@
         (click)="ev.preventNoNeededEvent($event); goEditPost(post.id);">
         <i class="npa-icon icon-edit"></i>
       </button>
-      <span class="npa-font--12 npa-font--semi-bold">By {{post.user?.username}}</span>
+      <button
+        class="npa-button npa-button--borderless npa-button--small"
+        *ngIf="!!post.user"
+        (click)="ev.preventNoNeededEvent($event); showThisUser(post.user)">
+        By {{post.user?.username}}
+      </button>
     </div>
   </div>
 </section>
@@ -52,3 +60,13 @@
 <div class="loading" *ngIf="loading">
   <npa-spinner></npa-spinner>
 </div>
+
+<npa-modal
+  [showModal]="showUserModal"
+  [modalConfig]="{}"
+  [title]="'User Info'"
+  [buttonsLabels]="{ action: 'Ok' }"
+  (action)="closeUserModal()"
+  (closeModal)="closeUserModal()">
+  <app-user-info [user]="userToShow"></app-user-info>
+</npa-modal>

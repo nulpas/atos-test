@@ -15,6 +15,7 @@ export type Post = {
   title: string;
   body: string;
   user?: User;
+  comments?: Comment[];
 };
 
 export type User = {
@@ -25,6 +26,7 @@ export type User = {
   address: Address;
   phone: string;
   website: string;
+  websiteHref?: string;
   company: Company;
 };
 
@@ -45,4 +47,12 @@ export type Company = {
   name: string;
   catchPhrase: string;
   bs: string;
+};
+
+export type Comment = {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
 };

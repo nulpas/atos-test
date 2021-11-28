@@ -14,18 +14,28 @@
 
     .blog__posts-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 400px);
+      grid-template-columns: repeat(auto-fill, var(--at-card-width));
       grid-auto-rows: auto;
       grid-gap: 2rem;
       .blog__card {
         @include npa.createFlexBox(column, normal, space-between, nowrap);
-        height: 270px;
-        width: 400px;
-        padding: var(--npa-spacing-24);
+        position: relative;
+        height: 300px;
+        width: var(--at-card-width);
+        padding: var(--npa-spacing-32);
         border: 1px solid var(--npa-color-space-3);
         border-left: 8px solid var(--npa-color-action-6);
-        border-radius: 6px;
+        border-radius: var(--at-card-border-radius);
         box-sizing: border-box;
+        .card--comments {
+          position: absolute;
+          right: 0;
+          top: 0;
+          padding: 0 var(--npa-spacing-16);
+          border-top-right-radius: var(--at-card-border-radius);
+          background-color: var(--npa-color-space-4);
+          color: var(--npa-color-white);
+        }
         .card--top {
           HR {
             width: 20%;
@@ -45,10 +55,6 @@
           margin-top: var(--npa-spacing-16);
         }
       }
-    }
-
-    .loading {
-      margin-top: calc(var(--npa-spacing-60) * 2);
     }
   }
 }

@@ -1,0 +1,20 @@
+@use '~@medea/atos-test/mixins' as npa;
+
+:host {
+  .user-info {
+    @include npa.createFlexBox(row, normal, normal, nowrap);
+    .user-info__image {
+      IMG {
+        width: 150px;
+        margin-top: var(--npa-spacing-4);
+        border: 1px solid var(--npa-color-space-4);
+      }
+    }
+    .user-info__data {
+      margin-left: var(--npa-spacing-40);
+      .user-info__site-link {
+        margin-left: var(--npa-spacing-4);
+      }
+    }
+  }
+}

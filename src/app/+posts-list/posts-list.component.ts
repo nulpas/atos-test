@@ -28,6 +28,9 @@ export class PostsListComponent implements OnDestroy {
   public readonly usersDropdownConfig: NpaDropdownConfig;
   public dropdownUsersKeyboard$: Subject<KeyboardEvent> = new Subject();
 
+  public showUserModal: boolean;
+  public userToShow: User | undefined;
+
   private _postsSource: Post[];
   private _optionsUsersSource: NpaOption[];
   private readonly _host: HTMLElement;
@@ -54,6 +57,7 @@ export class PostsListComponent implements OnDestroy {
       type: 'select',
       checkImage: false
     };
+    this.showUserModal = false;
     this._postsSource = [];
     this._optionsUsersSource = [];
 
@@ -123,6 +127,20 @@ export class PostsListComponent implements OnDestroy {
     this.userFilter.setValue('', { emitEvent: false });
     this.posts = [...this._postsSource];
     this._setCounter(this.posts.length);
+  }
+
+  public closeUserModal(): void {
+    this.userToShow = undefined;
+    this.showUserModal = false;
+    this._cd.markForCheck();
+  }
+
+  public showThisUser(user: User | undefined): void {
+    if (!!user) {
+      this.userToShow = user;
+      this.showUserModal = true;
+      this._cd.markForCheck();
+    }
   }
 
   ngOnDestroy(): void {

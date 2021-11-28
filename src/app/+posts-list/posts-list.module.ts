@@ -7,6 +7,8 @@ import { FormBehaviorModule } from '@circe/form-behavior';
 import { DropdownModule } from '@circe/dropdown';
 import { KeyboardEmitterModule } from '@circe/event-controls';
 import { SpinnerModule } from '@circe/spinner';
+import { ModalModule } from '@circe/modal';
+import { UserInfoModule } from '../user-info/user-info.module';
 
 @NgModule({
   declarations: [PostsListComponent],
@@ -17,7 +19,9 @@ import { SpinnerModule } from '@circe/spinner';
     FormBehaviorModule,
     DropdownModule,
     KeyboardEmitterModule,
-    SpinnerModule
+    SpinnerModule,
+    ModalModule,
+    UserInfoModule
   ]
 })
 export class PostsListModule {}
