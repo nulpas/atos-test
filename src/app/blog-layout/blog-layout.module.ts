@@ -4,18 +4,16 @@ import { BlogLayoutComponent } from './blog-layout.component';
 import { BlogLayoutRoutingModule } from './blog-layout-routing.module';
 import { HeaderModule } from '../header/header.module';
 import { SidebarModule } from '../sidebar/sidebar.module';
-
-
+import { NotificationModule } from '@circe/notification';
 
 @NgModule({
-  declarations: [
-    BlogLayoutComponent
-  ],
+  declarations: [BlogLayoutComponent],
   imports: [
     CommonModule,
     BlogLayoutRoutingModule,
     HeaderModule,
-    SidebarModule
+    SidebarModule,
+    NotificationModule
   ]
 })
-export class BlogLayoutModule { }
+export class BlogLayoutModule {}

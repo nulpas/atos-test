@@ -1,1 +1,50 @@
-post-form works!
+<h1 class="npa-font--42" *ngIf="edition">Post Edition</h1>
+<h1 class="npa-font--42" *ngIf="!edition">New Post</h1>
+
+<ng-container *ngIf="!loading">
+  <form class="post__form" [formGroup]="postForm">
+    <div class="form-item" *ngIf="edition">
+      <label class="npa-label">Id</label>
+      {{post?.id}}
+    </div>
+
+    <div class="form-item" *ngIf="!!optionsUsers?.length">
+      <label class="npa-label" for="post-user">User</label>
+      <npa-select
+        id="post-user"
+        formControlName="userId"
+        [config]="selectConfiguration"
+        [options]="optionsUsers">
+      </npa-select>
+    </div>
+
+    <div class="form-item">
+      <label class="npa-label" for="post-title">Title</label>
+      <input
+        id="post-title"
+        class="npa-input"
+        formControlName="title"
+        npaFormBehavior [error]="titleErrorMessage" [render]="true">
+    </div>
+
+    <div class="form-item">
+      <label class="npa-label" for="post-body">Body</label>
+      <textarea
+        id="post-body"
+        class="npa-textarea"
+        formControlName="body"
+        npaFormBehavior [error]="bodyErrorMessage" [render]="true"></textarea>
+    </div>
+  </form>
+
+  <button
+    class="submit npa-button"
+    [disabled]="postForm.invalid"
+    (click)="ev.preventNoNeededEvent($event); submit();">
+    {{(edition) ? 'Save changes' : 'Create post'}}
+  </button>
+</ng-container>
+
+<div class="loading" *ngIf="loading">
+  <npa-spinner></npa-spinner>
+</div>

@@ -1,5 +1,9 @@
 @import '../../mixins';
 
 :host {
-  @include contentView();
+  @include contentView() {
+    BUTTON.submit {
+      margin-top: var(--npa-spacing-48);
+    }
+  }
 }

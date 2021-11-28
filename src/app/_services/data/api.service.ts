@@ -1,6 +1,6 @@
 import { Injectable, NgZone } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { concatMap, Observable, of, throwError } from 'rxjs';
 import { ConfigService } from '../../_config/config.service';
 import { environment } from '../../../environments/environment';
 import { ToolService } from '@circe/core';
@@ -51,12 +51,7 @@ export interface HttpOptionsSimple {
 
   public apiGet(endPoint: string, baseEndPoint?: string): Observable<any> {
     const _baseEndPoint: string = baseEndPoint || this.baseMainEndPoint;
-    return this._http.get(`${_baseEndPoint}${endPoint}`, this.httpOptions).pipe(
-      catchError((error: HttpErrorResponse) => {
-        console.log('ERROR FROM DATA _apiGet', error);
-        return of(error);
-      })
-    );
+    return this._http.get(`${_baseEndPoint}${endPoint}`, this.httpOptions);
   }
 
   public apiPost(endPoint: string, requestBody: any, baseEndPoint?: string): Observable<any> {

@@ -3,3 +3,5 @@
   <app-sidebar></app-sidebar>
   <main><router-outlet (activate)="g.urlChanged$.next(true)"></router-outlet></main>
 </div>
+
+<npa-notification [config]="notificationConfig"></npa-notification>

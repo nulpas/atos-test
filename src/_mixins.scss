@@ -30,6 +30,16 @@
     margin-top: calc(var(--npa-spacing-60) * 2);
   }
 
+  .form-item {
+    margin-top: var(--npa-spacing-32);
+    TEXTAREA {
+      height: 10rem;
+    }
+    .npa-report {
+      position: absolute;
+    }
+  }
+
   @include npa.styleScrollbar(var(--npa-color-space-3));
 
   @content;

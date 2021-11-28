@@ -7,6 +7,7 @@ import { GlobalService } from '../global/global.service';
 import { combineLatest, mergeMap, Observable, of } from 'rxjs';
 import { Comment, Post, PostsData, SiteMenuOption, User } from '../../_types/response.types';
 import { map } from 'rxjs/operators';
+import { PostRequest } from '../../_types/request.types';
 
 @Injectable({ providedIn: 'root' }) export class DataService extends ApiService {
   constructor(
@@ -74,7 +75,7 @@ import { map } from 'rxjs/operators';
     return this.apiGet(`posts/${postId}/comments`);
   }
 
-  getOnePostData(postId: number): Observable<Post> {
+  public getOnePostData(postId: number): Observable<Post> {
     return this.getPostById(postId).pipe(
       mergeMap((post: Post) => combineLatest([
         of(post),
@@ -87,5 +88,13 @@ import { map } from 'rxjs/operators';
         comments: comments
       }))
     );
+  }
+
+  public createPost(body: PostRequest): Observable<Post> {
+    return this.apiPost('posts', body);
+  }
+
+  public updatePost(postId: number, body: Post): Observable<Post> {
+    return this.apiPut(`posts/${postId}`, body);
   }
 }
