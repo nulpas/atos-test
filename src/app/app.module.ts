@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { EventsModule, OrderConditionModule, ToolModule } from '@circe/core';
 import { HttpClientModule } from '@angular/common/http';
 import { INITIALIZER } from './_config/initializer.config';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -13,6 +14,7 @@ import { INITIALIZER } from './_config/initializer.config';
     BrowserModule,
     RouterModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     OrderConditionModule,
     ToolModule.forChild(),

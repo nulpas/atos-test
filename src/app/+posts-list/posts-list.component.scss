@@ -1,5 +1,54 @@
+@use '~@medea/atos-test/mixins' as npa;
 @import '../../mixins';
 
 :host {
-  @include contentView();
+  @include contentView() {
+    .blog__posts-toolbar {
+      display: flex;
+      align-items: center;
+      margin-bottom: var(--npa-spacing-40);
+      .posts-counter {
+        margin-left: var(--npa-spacing-40);
+      }
+    }
+
+    .blog__posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 400px);
+      grid-auto-rows: auto;
+      grid-gap: 2rem;
+      .blog__card {
+        @include npa.createFlexBox(column, normal, space-between, nowrap);
+        height: 270px;
+        width: 400px;
+        padding: var(--npa-spacing-24);
+        border: 1px solid var(--npa-color-space-3);
+        border-left: 8px solid var(--npa-color-action-6);
+        border-radius: 6px;
+        box-sizing: border-box;
+        .card--top {
+          HR {
+            width: 20%;
+            border: 0;
+            border-bottom: 1px solid var(--npa-color-space-6);
+            margin: var(--npa-spacing-16) 0;
+          }
+          .card__excerpt {
+            width: 100%;
+            height: calc(var(--at-line-height) * 3);
+            overflow: hidden;
+          }
+        }
+        .card--bottom {
+          @include npa.createFlexBox(row, center, space-between, nowrap);
+          min-height: var(--npa-component-height);
+          margin-top: var(--npa-spacing-16);
+        }
+      }
+    }
+
+    .loading {
+      margin-top: calc(var(--npa-spacing-60) * 2);
+    }
+  }
 }

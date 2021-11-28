@@ -26,7 +26,7 @@ export interface HttpOptionsSimple {
    * @description
    * EndPoints for DEVELOPMENT use. PRODUCTION endPoints are in assets/config.json file.
    */
-  public readonly baseMainEndPoint: string = 'http://localhost:3889';
+  public readonly baseMainEndPoint: string = 'https://jsonplaceholder.typicode.com';
   public readonly baseSecondaryEndPoint: string = '/assets/data';
 
   private readonly _forceToPro: boolean = false;

@@ -10,6 +10,22 @@
   box-sizing: border-box;
   overflow: auto;
 
+  H1, H3 {
+    margin-top: 0;
+  }
+  H1 {
+    margin-top: -16px;
+    font-weight: 100;
+  }
+
+  .sub-header {
+    @include npa.createFlexBox(row, center, normal, nowrap);
+    .sub-header--controls {
+      margin-left: var(--npa-spacing-48);
+      font-weight: normal;
+    }
+  }
+
   @include npa.styleScrollbar(var(--npa-color-space-3));
 
   @content;

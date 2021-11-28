@@ -4,6 +4,7 @@ import { PostsListComponent } from '../+posts-list/posts-list.component';
 import { AlbumsListComponent } from '../+albums-list/albums-list.component';
 import { UsersListComponent } from '../+users-list/users-list.component';
 import { PostFormComponent } from '../+post-form/post-form.component';
+import { PostDetailComponent } from '../+post-detail/post-detail.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,16 @@ const routes: Routes = [
     path: 'posts/new',
     component: PostFormComponent,
     loadChildren: () => import('../+post-form/post-form.module').then(m => m.PostFormModule)
+  },
+  {
+    path: 'post/:id/edit',
+    component: PostFormComponent,
+    loadChildren: () => import('../+post-form/post-form.module').then(m => m.PostFormModule)
+  },
+  {
+    path: 'post/:id',
+    component: PostDetailComponent,
+    loadChildren: () => import('../+post-detail/post-detail.module').then(m => m.PostDetailModule)
   },
   {
     path: 'albums',

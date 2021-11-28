@@ -11,6 +11,8 @@ import { NpaColor } from '@medea/atos-test/colors';
 
   public appLanguage: 'en_US' | 'es_ES' = 'en_US';
 
+  public postsEdition: boolean = false;
+
   private readonly _defaultColorOpacity: number;
   private readonly _env: ApiConfigFile;
 
