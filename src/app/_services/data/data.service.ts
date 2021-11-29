@@ -5,7 +5,7 @@ import { ConfigService } from '../../_config/config.service';
 import { OrderConditionPipe } from '@circe/core';
 import { GlobalService } from '../global/global.service';
 import { combineLatest, mergeMap, Observable, of } from 'rxjs';
-import { Comment, Post, PostsData, SiteMenuOption, User } from '../../_types/response.types';
+import { Album, AlbumsData, Comment, Photo, Post, PostsData, SiteMenuOption, User } from '../../_types/response.types';
 import { catchError, map } from 'rxjs/operators';
 import { PostRequest } from '../../_types/request.types';
 
@@ -49,7 +49,7 @@ import { PostRequest } from '../../_types/request.types';
           posts: posts.map((p: Post) => {
             const user: User = users.find((u: User) => u.id === p.userId)!;
             const comments: Comment[] = commentsApi.filter((c: Comment) => c.postId === p.id);
-            return {...p, user, comments};
+            return { ...p, user, comments };
           }),
           users
         };
@@ -108,5 +108,68 @@ import { PostRequest } from '../../_types/request.types';
 
   public updatePost(postId: number, body: Post): Observable<Post> {
     return this.apiPut(`posts/${postId}`, body);
+  }
+
+  public getBffAlbumsData(): Observable<AlbumsData> {
+    return this.apiGet('albums-data', this.baseThirdEndPoint).pipe(
+      catchError(() => this.getAlbumsData())
+    );
+  }
+
+  public getAlbumsData(): Observable<AlbumsData> {
+    return combineLatest([
+      this.getAlbums(),
+      this.getUsers(),
+      this.getPhotos()
+    ]).pipe(
+      map(([albums, usersApi, photosApi]: [Album[], User[], Photo[]]) => {
+        const users: User[] = usersApi.map((u: User) => DataService._transformsUser(u));
+        return {
+          albums: albums.map((a: Album) => {
+            const user: User = users.find((u: User) => u.id === a.userId)!;
+            const photos: Photo[] = photosApi.filter((ph: Photo) => ph.albumId === a.id);
+            return { ...a, user, photos };
+          }),
+          users
+        };
+      })
+    );
+  }
+
+  public getAlbums(): Observable<Album[]> {
+    return this.apiGet('albums');
+  }
+
+  public getAlbumById(albumId: number): Observable<Album> {
+    return this.apiGet(`albums/${albumId}`);
+  }
+
+  public getPhotos(): Observable<Photo[]> {
+    return this.apiGet('photos');
+  }
+
+  public getPhotosByAlbumId(albumId: number): Observable<Photo[]> {
+    return this.apiGet(`albums/${albumId}/photos`);
+  }
+
+  public getBffOneAlbumData(albumId: number): Observable<Album> {
+    return this.apiGet(`one-album-data/${albumId}`, this.baseThirdEndPoint).pipe(
+      catchError(() => this.getOneAlbumData(albumId))
+    );
+  }
+
+  public getOneAlbumData(albumId: number): Observable<Album> {
+    return this.getAlbumById(albumId).pipe(
+      mergeMap((album: Album) => combineLatest([
+        of(album),
+        this.getUserById(album.userId),
+        this.getPhotosByAlbumId(albumId)
+      ])),
+      map(([album, user, photos]: [Album, User, Photo[]]) => ({
+        ...album,
+        user: DataService._transformsUser(user),
+        photos
+      }))
+    );
   }
 }

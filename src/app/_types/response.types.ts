@@ -56,3 +56,24 @@ export type Comment = {
   email: string;
   body: string;
 };
+
+export type Album = {
+  id: number;
+  title: string;
+  userId: number;
+  user?: User;
+  photos?: Photo[];
+};
+
+export type AlbumsData = {
+  albums: Album[];
+  users: User[];
+};
+
+export type Photo = {
+  id: number;
+  title: string;
+  url: string;
+  thumbnailUrl: string;
+  albumId: number;
+};

@@ -1,0 +1,26 @@
+@import '../../mixins';
+
+:host {
+  @include contentView() {
+    .album {
+      .photos__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, 150px);
+        grid-auto-rows: auto;
+        grid-gap: 2rem;
+        .photo {
+          IMG {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+
+    .image-modal {
+      text-align: center;
+      IMG {
+        width: 500px;
+      }
+    }
+  }
+}

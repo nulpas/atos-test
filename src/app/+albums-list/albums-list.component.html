@@ -1,1 +1,64 @@
-albums-list works!
+<h1 class="npa-font--42">
+  Albums
+</h1>
+
+<section class="blog__posts-toolbar" *ngIf="!loading">
+  <div class="user-filter">
+    <label for="user-filter"></label>
+    <input
+      class="npa-input npa-input--search npa-input--action-clear"s
+      id="user-filter"
+      placeholder="Filter by user"
+      [formControl]="userFilter"
+      npaFormBehavior [render]="true" (clickIcon)="clear($event)"
+      npaDropdownEvents [eventToTrigger]="'click'" (event)="triggerUsersDropdown()"
+      npaKeyboardEmitter (keyboardEmitter)="dropdownUsersKeyboard$.next($event)">
+    <npa-dropdown
+      [(showDropdown)]="showDropdownUsers"
+      [options]="optionsUsers"
+      [config]="usersDropdownConfig"
+      [keyboardControl]="dropdownUsersKeyboard$"
+      (optionSelected)="filterByUser($event)">
+    </npa-dropdown>
+  </div>
+  <div class="posts-counter npa-color--space-6">{{counter}}</div>
+</section>
+
+<section class="blog__posts-grid" *ngIf="!loading">
+  <div class="blog__card" *ngFor="let album of albums; trackBy: tools.identifier;">
+    <div class="card--important npa-font--12">
+      {{album.photos?.length}} photos
+    </div>
+    <div class="card--top">
+      <h3>{{album.title}}</h3>
+      <hr>
+      <div class="card--thumbs" *ngIf="!!album.photos">
+        <img [src]="album.photos[0].thumbnailUrl" [alt]="album.photos[0].title">
+        <img [src]="album.photos[1].thumbnailUrl" [alt]="album.photos[1].title">
+      </div>
+    </div>
+    <div class="card--bottom">
+      <a class="npa-link npa-link-hover-underline-inverse" [routerLink]="['/', 'album', album.id]">More</a>
+      <button
+        class="npa-button npa-button--borderless npa-button--small"
+        *ngIf="!!album.user"
+        (click)="ev.preventNoNeededEvent($event); showThisUser(album.user)">
+        By {{album.user?.username}}
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="loading" *ngIf="loading">
+  <npa-spinner></npa-spinner>
+</div>
+
+<npa-modal
+  [showModal]="showUserModal"
+  [modalConfig]="{}"
+  [title]="'User Info'"
+  [buttonsLabels]="{ action: 'Ok' }"
+  (action)="closeUserModal()"
+  (closeModal)="closeUserModal()">
+  <app-user-info [user]="userToShow"></app-user-info>
+</npa-modal>

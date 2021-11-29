@@ -1,1 +1,38 @@
-album-detail works!
+<h1 class="sub-header npa-font--42">
+  Album Detail
+  <span class="sub-header--controls">
+    <button class="npa-button npa-button--borderless npa-button--icon-left" (click)="ev.preventNoNeededEvent($event); goAlbumsList();">
+      <i class="npa-icon npa-icon--left icon-arrow-left"></i>
+      Back to albums list
+    </button>
+  </span>
+</h1>
+
+<section class="album" *ngIf="!!album && !loading">
+  <h2>{{album.title}}</h2>
+  <div class="photos__grid">
+    <div class="photo" *ngFor="let photo of album.photos; trackBy: tools.identifier;">
+      <img
+        class="npa-tooltip"
+        [src]="photo.thumbnailUrl"
+        [alt]="photo.title"
+        [title]="photo.title"
+        (click)="ev.preventNoNeededEvent($event); showThisPhoto(photo)">
+    </div>
+  </div>
+</section>
+
+<div class="loading" *ngIf="loading">
+  <npa-spinner></npa-spinner>
+</div>
+
+<npa-modal
+  [showModal]="showImageModal"
+  [modalConfig]="imageModalConfig"
+  [title]="(!!photoToDetail) ? photoToDetail.title : ''"
+  (action)="closeImageModal()"
+  (closeModal)="closeImageModal()">
+  <div class="image-modal">
+    <img [src]="photoToDetail?.url" [alt]="photoToDetail?.title">
+  </div>
+</npa-modal>

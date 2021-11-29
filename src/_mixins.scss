@@ -1,6 +1,6 @@
 @use '~@medea/atos-test/mixins' as npa;
 
-//## Mixin for apply common styles to all content views in backoffice sections.
+//## Mixin for apply common styles to all content views in blog sections.
 //## PARAMETERS: void
 @mixin contentView() {
   position: relative;
@@ -45,6 +45,8 @@
   @content;
 }
 
+//## Mixin for apply styles to post separators.
+//## PARAMETERS: void
 @mixin sectionSeparator() {
   @include npa.createFlexBox(column, center, center, nowrap);
   vertical-align: baseline;
@@ -63,6 +65,52 @@
     I {
       line-height: 1;
       color: var(--npa-color-space-3);
+    }
+  }
+}
+
+//## Mixin for apply styles to cards.
+//## PARAMETERS: $cardHeight
+@mixin blogCard($cardHeight) {
+  .blog__card {
+    @include npa.createFlexBox(column, normal, space-between, nowrap);
+    position: relative;
+    height: $cardHeight;
+    width: var(--at-card-width);
+    padding: var(--npa-spacing-32);
+    border: 1px solid var(--npa-color-space-3);
+    border-left: 8px solid var(--npa-color-action-6);
+    border-radius: var(--at-card-border-radius);
+    box-sizing: border-box;
+    .card--important {
+      position: absolute;
+      right: 0;
+      top: 0;
+      padding: 0 var(--npa-spacing-16);
+      border-top-right-radius: var(--at-card-border-radius);
+      background-color: var(--npa-color-space-4);
+      color: var(--npa-color-white);
+    }
+    .card--top {
+      HR {
+        width: 20%;
+        border: 0;
+        border-bottom: 1px solid var(--npa-color-space-6);
+        margin: var(--npa-spacing-16) 0;
+      }
+      .card__excerpt {
+        width: 100%;
+        height: calc(var(--at-line-height) * 3);
+        overflow: hidden;
+      }
+      .card--thumbs {
+        @include npa.createFlexBox(row, center, space-between, nowrap);
+      }
+    }
+    .card--bottom {
+      @include npa.createFlexBox(row, center, space-between, nowrap);
+      min-height: var(--npa-component-height);
+      margin-top: var(--npa-spacing-16);
     }
   }
 }

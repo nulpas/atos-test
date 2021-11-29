@@ -8,7 +8,7 @@
   </span>
 </h1>
 
-<section class="post" *ngIf="!!post">
+<section class="post" *ngIf="!!post && !loading">
   <h2>{{post.title}}</h2>
   <div class="post__image" [ngStyle]="{backgroundImage: 'url(assets/images/post-image-example.jpeg)'}"></div>
   <p class="post__body" [innerText]="post.body"></p>

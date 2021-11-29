@@ -17,44 +17,7 @@
       grid-template-columns: repeat(auto-fill, var(--at-card-width));
       grid-auto-rows: auto;
       grid-gap: 2rem;
-      .blog__card {
-        @include npa.createFlexBox(column, normal, space-between, nowrap);
-        position: relative;
-        height: 300px;
-        width: var(--at-card-width);
-        padding: var(--npa-spacing-32);
-        border: 1px solid var(--npa-color-space-3);
-        border-left: 8px solid var(--npa-color-action-6);
-        border-radius: var(--at-card-border-radius);
-        box-sizing: border-box;
-        .card--comments {
-          position: absolute;
-          right: 0;
-          top: 0;
-          padding: 0 var(--npa-spacing-16);
-          border-top-right-radius: var(--at-card-border-radius);
-          background-color: var(--npa-color-space-4);
-          color: var(--npa-color-white);
-        }
-        .card--top {
-          HR {
-            width: 20%;
-            border: 0;
-            border-bottom: 1px solid var(--npa-color-space-6);
-            margin: var(--npa-spacing-16) 0;
-          }
-          .card__excerpt {
-            width: 100%;
-            height: calc(var(--at-line-height) * 3);
-            overflow: hidden;
-          }
-        }
-        .card--bottom {
-          @include npa.createFlexBox(row, center, space-between, nowrap);
-          min-height: var(--npa-component-height);
-          margin-top: var(--npa-spacing-16);
-        }
-      }
+      @include blogCard(300px);
     }
   }
 }

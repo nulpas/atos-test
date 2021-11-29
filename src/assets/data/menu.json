@@ -8,10 +8,5 @@
     "id": "albums",
     "name": "Albums",
     "location": ["/", "albums"]
-  },
-  {
-    "id": "users",
-    "name": "Users",
-    "location": ["/", "users"]
   }
 ]

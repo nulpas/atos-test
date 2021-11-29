@@ -66,6 +66,56 @@ app
       })).catch((reason) => {
         res.status(reason.status).json(reason.data);
       });
+  })
+  .get('/albums-data', (req, res) => {
+    const _requests = [
+      axios.get('https://jsonplaceholder.typicode.com/albums'),
+      axios.get('https://jsonplaceholder.typicode.com/users'),
+      axios.get('https://jsonplaceholder.typicode.com/photos')
+    ];
+    axios.all(_requests)
+      .then(axios.spread((...responses) => {
+        const albums = responses[0].data;
+        const usersApi = responses[1].data;
+        const photosApi = responses[2].data;
+        const users = usersApi.map((user) => _transformUser(user));
+        const response = {
+          albums: albums.map((album) => {
+            const user = users.find((user) => user.id === album.userId);
+            const photos = photosApi.filter((photo) => photo.albumId === album.id);
+            return { ...album, user, photos };
+          }),
+          users
+        };
+        res.json(response);
+      })).catch((reason) => {
+      res.status(reason.status).json(reason.data);
+    });
+  })
+  .get('/one-album-data/:id', (req, res) => {
+    const _requests = [
+      axios.get(`https://jsonplaceholder.typicode.com/albums/${req.params.id}`),
+      axios.get(`https://jsonplaceholder.typicode.com/albums/${req.params.id}/photos`)
+    ];
+    axios.all(_requests)
+      .then(axios.spread((...responses) => {
+        const album = responses[0].data;
+        const photos = responses[1].data;
+        axios.get(`https://jsonplaceholder.typicode.com/users/${album.userId}`)
+          .then((user) => {
+            const response = {
+              ...album,
+              user: _transformUser(user.data),
+              photos
+            };
+            res.json(response);
+          })
+          .catch((reason) => {
+            res.status(reason.status).json(reason.data);
+          });
+      })).catch((reason) => {
+      res.status(reason.status).json(reason.data);
+    });
   });
 
 app.get('/healthcheck', (req, res) => {

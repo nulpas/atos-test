@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PostsListComponent } from '../+posts-list/posts-list.component';
 import { AlbumsListComponent } from '../+albums-list/albums-list.component';
-import { UsersListComponent } from '../+users-list/users-list.component';
 import { PostFormComponent } from '../+post-form/post-form.component';
 import { PostDetailComponent } from '../+post-detail/post-detail.component';
 import { AlbumDetailComponent } from '../+album-detail/album-detail.component';
@@ -37,11 +36,6 @@ const routes: Routes = [
     path: 'album/:id',
     component: AlbumDetailComponent,
     loadChildren: () => import('../+album-detail/album-detail.module').then(m => m.AlbumDetailModule)
-  },
-  {
-    path: 'users',
-    component: UsersListComponent,
-    loadChildren: () => import('../+users-list/users-list.module').then(m => m.UsersListModule)
   },
   {
     path: '**',

@@ -28,6 +28,7 @@
     "@circe/notification": "^1.5.3",
     "@circe/select": "^1.5.7",
     "@circe/spinner": "^1.5.5",
+    "@circe/tooltip": "^1.5.7",
     "@medea/atos-test": "^1.0.5",
     "rxjs": "~7.4.0",
     "tslib": "^2.3.1",
