@@ -76,3 +76,4 @@ Además de levantar los contenedores indicados, se crearán unas imágnes Docker
 * Todo el diseño de la arquitectura de la aplicación es modular.
 * Se ha construido un enrutado en lazy loading.
 * Se ha usado un interceptor http para notificar posibles problemas de conexiones con API y demás problemas relacionados.
+* Se ha incluido Eslint como primer chequeo de código. Para ejecutar un análisis basta con ejecutar ```npm run lint``` o ```yarn lint```

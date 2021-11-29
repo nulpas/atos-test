@@ -18,7 +18,7 @@ import { NpaColor } from '@medea/atos-test/colors';
 
   constructor(private _config: ConfigService) {
     this._env = _config.config as ApiConfigFile;
-    this.updateDate = this._env.DATE_DEPLOY;
+    this.updateDate = this._env?.DATE_DEPLOY;
     this._defaultColorOpacity = 0.6;
   }
 

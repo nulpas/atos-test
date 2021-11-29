@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { RouterModule } from '@angular/router';
-import { EventsModule, OrderConditionModule, ToolModule } from '@circe/core';
+import { EventsModule, OrderConditionModule, OrderConditionPipe, ToolModule } from '@circe/core';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { INITIALIZER } from './_config/initializer.config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -25,7 +25,8 @@ import { RequestInterceptor } from './_interceptors/request.interceptor';
   ],
   providers: [
     INITIALIZER,
-    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+    OrderConditionPipe
   ],
   bootstrap: [AppComponent]
 })
