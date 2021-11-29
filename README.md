@@ -12,7 +12,7 @@ Lo primero que haremos será clonar el repositorio:
 https://github.com/nulpas/atos-test.git
 ```
 
-##Inicio en local
+## Inicio en local
 
 Ahora hay que instalar las dependencias del proyecto front y de la pieza Node. Con el repo clonado, accederemos al directorio raíz del proyecto para ejecutar un "npm install" o un "yarn install".
 
@@ -45,7 +45,7 @@ Esto debería lanzarnos la aplicación front en nuestro navegador por defecto en
 http://localhost:4555/
 ```
 
-##Inicio con Docker
+## Inicio con Docker
 
 Se ha configurado una dockerización tanto de la pieza front como de la pieza back. Para arrancar vía Docker, lo único que tenemos que hacer es ejecutar el siguiente script:
 
@@ -69,7 +69,7 @@ http://localhost:6555/
 
 Además de levantar los contenedores indicados, se crearán unas imágnes Docker en el directorio "scripts" tageadas con la fecha y hora de la ejecución, las cuales podrían instalarse y levantarse con facilidad en cualquier otro entorno que se desease.
 
-##A tener en cuenta
+## A tener en cuenta
 
 * Para aplicar los estilos del site se ha construido un template con Medea, que es un sistema de templates desarrollado por mí: ```https://github.com/medea-template-system/medea```
 * Los componentes del sistema de diseño tales como Modal, Input, Select, Dropdown, Notification, etc. pertenecen a Circe, un sistema de diseño propio también desarrollado por mí: ```https://github.com/circe-components/circe```
