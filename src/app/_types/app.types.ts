@@ -3,6 +3,7 @@ import { NotificationConfig } from '@circe/notification';
 export type ApiConfigFile = {
   BASE_API_URL__MAIN: string;
   BASE_API_URL__SECONDARY: string;
+  BASE_API_URL__THIRD: string;
   DATE_DEPLOY: string;
 }
 

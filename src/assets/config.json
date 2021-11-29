@@ -1,5 +1,6 @@
 {
-  "BASE_API_URL__MAIN": "http://fake.api",
+  "BASE_API_URL__MAIN": "https://jsonplaceholder.typicode.com/",
   "BASE_API_URL__SECONDARY": "/assets/data/",
+  "BASE_API_URL__THIRD": "http://fake.api",
   "DATE_DEPLOY": "March 27, 1976"
 }

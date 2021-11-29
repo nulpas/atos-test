@@ -6,7 +6,7 @@ import { DataService } from '../_services/data/data.service';
 import { SelectConfig } from '@circe/select';
 import { EventsService, NpaOption } from '@circe/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NotificationsService } from '../_services/data/notifications.service';
+import { NotificationsService } from '../_services/notifications/notifications.service';
 
 @Component({
   selector: 'app-post-form',

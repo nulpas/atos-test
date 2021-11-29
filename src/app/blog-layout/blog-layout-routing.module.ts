@@ -5,6 +5,7 @@ import { AlbumsListComponent } from '../+albums-list/albums-list.component';
 import { UsersListComponent } from '../+users-list/users-list.component';
 import { PostFormComponent } from '../+post-form/post-form.component';
 import { PostDetailComponent } from '../+post-detail/post-detail.component';
+import { AlbumDetailComponent } from '../+album-detail/album-detail.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
     path: 'albums',
     component: AlbumsListComponent,
     loadChildren: () => import('../+albums-list/albums-list.module').then(m => m.AlbumsListModule)
+  },
+  {
+    path: 'album/:id',
+    component: AlbumDetailComponent,
+    loadChildren: () => import('../+album-detail/album-detail.module').then(m => m.AlbumDetailModule)
   },
   {
     path: 'users',

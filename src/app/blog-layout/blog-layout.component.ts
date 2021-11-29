@@ -3,7 +3,7 @@ import { GlobalService } from '../_services/global/global.service';
 import { NotificationConfig, NotificationService } from '@circe/notification';
 import { Subject, takeUntil } from 'rxjs';
 import { NotificationTrigger } from '../_types/app.types';
-import { NotificationsService } from '../_services/data/notifications.service';
+import { NotificationsService } from '../_services/notifications/notifications.service';
 
 @Component({
   selector: 'app-blog-layout',

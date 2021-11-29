@@ -3,10 +3,9 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { NotificationsService } from '../_services/data/notifications.service';
+import { NotificationsService } from '../_services/notifications/notifications.service';
 
-@Injectable({ providedIn: 'root' })
-export class RequestInterceptor implements HttpInterceptor {
+@Injectable({ providedIn: 'root' }) export class RequestInterceptor implements HttpInterceptor {
   constructor(
     private _not: NotificationsService,
     private _router: Router
@@ -15,12 +14,14 @@ export class RequestInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        this._not.triggerNotification$.next({
-          notification: {
-            message: `Error ${error.message}`,
-            type: 'critical'
-          }
-        });
+        if (!error.url?.includes('posts-data') && !error.url?.includes('one-post-data')) {
+          this._not.triggerNotification$.next({
+            notification: {
+              message: `Error ${error.message}`,
+              type: 'critical'
+            }
+          });
+        }
         return throwError(() => new Error(error.message));
       })
     );

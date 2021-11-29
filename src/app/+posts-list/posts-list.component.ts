@@ -61,7 +61,7 @@ export class PostsListComponent implements OnDestroy {
     this._postsSource = [];
     this._optionsUsersSource = [];
 
-    _data.getPostsData().pipe(
+    _data.getBffPostsData().pipe(
       takeUntil(this._componentDestroyed$)
     ).subscribe((postsData: PostsData) => {
       this.posts = postsData.posts;

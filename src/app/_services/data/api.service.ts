@@ -1,11 +1,10 @@
 import { Injectable, NgZone } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { concatMap, Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { ConfigService } from '../../_config/config.service';
 import { environment } from '../../../environments/environment';
 import { ToolService } from '@circe/core';
 import { ApiConfigFile } from '../../_types/app.types';
-import { catchError } from 'rxjs/operators';
 
 export interface HttpOptions {
   headers?: HttpHeaders;
@@ -28,6 +27,7 @@ export interface HttpOptionsSimple {
    */
   public readonly baseMainEndPoint: string = 'https://jsonplaceholder.typicode.com';
   public readonly baseSecondaryEndPoint: string = '/assets/data';
+  public readonly baseThirdEndPoint: string = 'http://localhost:7555';
 
   private readonly _forceToPro: boolean = false;
 
@@ -37,9 +37,11 @@ export interface HttpOptionsSimple {
     if (this.production) {
       this.baseMainEndPoint = (_config.config as ApiConfigFile).BASE_API_URL__MAIN;
       this.baseSecondaryEndPoint = (_config.config as ApiConfigFile).BASE_API_URL__SECONDARY;
+      this.baseThirdEndPoint = (_config.config as ApiConfigFile).BASE_API_URL__THIRD;
     }
     this.baseMainEndPoint = ToolService.checkLastChar(this.baseMainEndPoint, '/');
     this.baseSecondaryEndPoint = ToolService.checkLastChar(this.baseSecondaryEndPoint, '/');
+    this.baseThirdEndPoint = ToolService.checkLastChar(this.baseThirdEndPoint, '/');
 
     this.httpOptions = {
       headers: new HttpHeaders({

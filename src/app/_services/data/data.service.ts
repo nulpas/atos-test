@@ -6,7 +6,7 @@ import { OrderConditionPipe } from '@circe/core';
 import { GlobalService } from '../global/global.service';
 import { combineLatest, mergeMap, Observable, of } from 'rxjs';
 import { Comment, Post, PostsData, SiteMenuOption, User } from '../../_types/response.types';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { PostRequest } from '../../_types/request.types';
 
 @Injectable({ providedIn: 'root' }) export class DataService extends ApiService {
@@ -29,6 +29,12 @@ import { PostRequest } from '../../_types/request.types';
 
   public getMenuOptions(): Observable<SiteMenuOption[]> {
     return this.apiGet('menu.json', this.baseSecondaryEndPoint);
+  }
+
+  public getBffPostsData(): Observable<PostsData> {
+    return this.apiGet('posts-data', this.baseThirdEndPoint).pipe(
+      catchError(() => this.getPostsData())
+    );
   }
 
   public getPostsData(): Observable<PostsData> {
@@ -75,6 +81,12 @@ import { PostRequest } from '../../_types/request.types';
     return this.apiGet(`posts/${postId}/comments`);
   }
 
+  public getBffOnePostData(postId: number): Observable<Post> {
+    return this.apiGet(`one-post-data/${postId}`, this.baseThirdEndPoint).pipe(
+      catchError(() => this.getOnePostData(postId))
+    );
+  }
+
   public getOnePostData(postId: number): Observable<Post> {
     return this.getPostById(postId).pipe(
       mergeMap((post: Post) => combineLatest([
@@ -85,7 +97,7 @@ import { PostRequest } from '../../_types/request.types';
       map(([post, user, comments]: [Post, User, Comment[]]) => ({
         ...post,
         user: DataService._transformsUser(user),
-        comments: comments
+        comments
       }))
     );
   }

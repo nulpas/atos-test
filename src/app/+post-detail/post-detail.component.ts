@@ -30,7 +30,7 @@ export class PostDetailComponent implements OnDestroy {
     this._idToShow = _route.snapshot.params['id'];
 
     if (!!this._idToShow) {
-      _data.getOnePostData(this._idToShow).pipe(
+      _data.getBffOnePostData(this._idToShow).pipe(
         takeUntil(this._componentDestroyed$)
       ).subscribe((post: Post) => {
         this.post = post;
