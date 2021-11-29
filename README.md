@@ -1,27 +1,78 @@
 # AtosTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.3.
+Proyecto generado con Angular 13.0.2
 
-## Development server
+En el directorio "server" se ha incluido una pequeña pieza backend construida con NodeJS para resumir las múltiples llamadas de algunas páginas.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+El front intentará usar primero esta pieza Node, pero si esta no estuviera levantada, intentará acceder a los datos de forma directa, es decir, mediante los endpoints de {JSON} Placeholder.
 
-## Code scaffolding
+Lo primero que haremos será clonar el repositorio:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+https://github.com/nulpas/atos-test.git
+```
 
-## Build
+##Inicio en local
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Ahora hay que instalar las dependencias del proyecto front y de la pieza Node. Con el repo clonado, accederemos al directorio raíz del proyecto para ejecutar un "npm install" o un "yarn install".
 
-## Running unit tests
+Una vez finalizada la instalación de las dependencias en el directorio raíz, accederemos al subdirectorio "server" para volver a ejecutar allí dentro de nuevo el comando "npm install" o "yarn install".
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Una vez instaladas las dependencias de ambos proyectos, procederemos a arrancar primero la pieza Node. Desde el subdirectorio "server" ejecutaremos:
 
-## Running end-to-end tests
+```
+node index.js
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Esto disponibilizará la API en la siguiente ruta:
 
-## Further help
+```
+http://localhost:7555
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Ahora ya podemos arrancar la pieza front con cualquiera de los comandos:
+
+```
+npm start
+```
+```
+yarn start
+```
+
+Esto debería lanzarnos la aplicación front en nuestro navegador por defecto en la siguiente ruta:
+
+```
+http://localhost:4555/
+```
+
+##Inicio con Docker
+
+Se ha configurado una dockerización tanto de la pieza front como de la pieza back. Para arrancar vía Docker, lo único que tenemos que hacer es ejecutar el siguiente script:
+
+```
+sh scripts/local-docker.sh
+```
+
+Hay que tener en cuenta que el script está diseñado para que sea ejecutado desde el directorio raíz del proyecto.
+
+La ejecución de este script nos levantará un contenedor Docker con la pieza Node en la dirección:
+
+```
+http://localhost:7999/
+```
+
+y otro contendor Docker con el front en la siguiente url:
+
+```
+http://localhost:6555/
+```
+
+Además de levantar los contenedores indicados, se crearán unas imágnes Docker en el directorio "scripts" tageadas con la fecha y hora de la ejecución, las cuales podrían instalarse y levantarse con facilidad en cualquier otro entorno que se desease.
+
+##A tener en cuenta
+
+* Para aplicar los estilos del site se ha construido un template con Medea, que es un sistema de templates desarrollado por mí: ```https://github.com/medea-template-system/medea```
+* Los componentes del sistema de diseño tales como Modal, Input, Select, Dropdown, Notification, etc. pertenecen a Circe, un sistema de diseño propio también desarrollado por mí: ```https://github.com/circe-components/circe```
+* Todo el diseño de la arquitectura de la aplicación es modular.
+* Se ha construido un enrutado en lazy loading.
+* Se ha usado un interceptor http para notificar posibles problemas de conexiones con API y demás problemas relacionados.
